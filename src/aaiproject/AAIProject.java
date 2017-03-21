@@ -36,11 +36,7 @@ public class AAIProject {
 
                 System.out.println("Country [AREA= " + country[0] + " , BFIHOST=" + country[1] + " , FARL= " + country[2] + " , FPEXT= " + country[3] + 
                         " ,  LDP= " + country[4] + " , PROPWET= " + country[5] +"]");
-                
-                
-                
-                
-                
+              
             }
 
         } catch (FileNotFoundException e) {
