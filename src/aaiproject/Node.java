@@ -22,7 +22,7 @@ public class Node {
         }
         
         public void setWeight(double newValue) {
-        weight = newValue;
+            weight = newValue;
         }
         
         public void setDelta(double newValue) {
@@ -33,7 +33,7 @@ public class Node {
             Ui = newValue;
         }
         
-        public void setNewWeight(int newWeight) {
-            updatedweight = newWeight;
+        public void setNewWeight(double newWeight) {
+            weight = newWeight;
         }
 }

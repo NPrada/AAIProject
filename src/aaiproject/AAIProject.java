@@ -39,15 +39,13 @@ public class AAIProject {
         double node3Uj = calcNodeUj(w1_3.weight , w1_3.Ui , w2_3.weight , w2_3.Ui , w0_3.weight);
         double node4Uj = calcNodeUj(w1_4.weight , w1_4.Ui , w2_4.weight , w2_4.Ui , w0_4.weight);
       
-                                                            
         Node w3_5 = new Node(2,node3Uj);                                        //output node weights
         Node w4_5 = new Node(4,node4Uj);
         
         Node w0_5 = new Node(-3.92,0);                                          //output node
         
         double outputnodeUj = calcNodeUj(w3_5.weight , w3_5.Ui , w4_5.weight , w4_5.Ui , w0_5.weight);
-        w0_5.setUi(outputnodeUj);
-        
+        System.out.println(w0_5.weight);
         
         
         //calculate delta for the output cell
@@ -58,11 +56,27 @@ public class AAIProject {
         
         //calculate delta for node 4
         w0_4.setDelta(calcDelta(w4_5.Ui,w4_5.weight,w0_5.delta));
-            
+         
+        //do the pass to update all the weights
+        w0_3.setNewWeight(updateWeight(w0_3.weight,1,w0_3.delta));
+        w1_3.setNewWeight(updateWeight(w1_3.weight,w1_3.Ui,w0_3.delta));
+        w2_3.setNewWeight(updateWeight(w2_3.weight,w2_3.Ui,w0_3.delta));
+        
+        w0_4.setNewWeight(updateWeight(w0_4.weight,1,w0_4.delta));
+        w1_4.setNewWeight(updateWeight(w1_3.weight,w1_3.Ui,w0_4.delta));
+        w2_4.setNewWeight(updateWeight(w2_3.weight,w2_3.Ui,w0_4.delta));
+        
+        w0_5.setNewWeight(updateWeight(w0_5.weight,1,w0_5.delta));
+        w3_5.setNewWeight(updateWeight(w1_3.weight,w1_3.Ui,w0_5.delta));
+        w4_5.setNewWeight(updateWeight(w2_3.weight,w2_3.Ui,w0_5.delta));
     }
     
     //This calculates the nodes detal depending on the Uj of the node and the desired output
-    
+    public static double updateWeight(double currentWeight, double Ui,double pointNodeDelta) {
+        
+        double newWeight = currentWeight + 0.1 * pointNodeDelta * Ui;
+        return newWeight;
+    }
     
     public static double calcDelta(double nodesUj, double linkWeight, double outputDelta){
         double S;
