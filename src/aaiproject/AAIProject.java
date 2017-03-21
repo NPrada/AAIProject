@@ -60,10 +60,10 @@ public class AAIProject {
         
         
         
-        calcHiddenNodeUj(w1_3.weight , w1_3.Ui , w2_3.weight , w2_3.Ui , w0_3.weight);
+        System.out.println(calcHiddenNodeUj(w1_3.weight , w1_3.Ui , w2_3.weight , w2_3.Ui , w0_3.weight));
         
 //        System.out.println(w1_3.weight);
-//        System.out.println(node3Sj);
+        System.out.println(node3fSj);
 //        System.out.println(node4fSj);
         
     }
@@ -72,27 +72,28 @@ public class AAIProject {
 //        int x;
 //        x = w1weig;
 //    }
-    public static void calcHiddenNodeUj(double... w){
+    public static double calcHiddenNodeUj(double... w){
         double Sj =0; 
+        double Uj = 0;
         double inputs[];
         inputs = new double [50];
         int i = 0;
         
-        for (double arg : w) {
+        for (double arg : w) {                                                  //sets the inputs into an array
             inputs[i] = arg;
             
             i++;
         }
         
-        for (int x = 0; x < i-1; x++){
+        for (int x = 0; x < i-1; x++){                                          //adds up the differnt w1_3.weight * w1_3.Ui
             if ( (x & 1) == 0 ) { 
             //even
             Sj = Sj + inputs[x]*inputs[x+1];
         
             }}
-        Sj = Sj + inputs[i-1];                                                        //Sj is done being calculated
-        
-        System.out.println(Sj);
+        Sj = Sj + inputs[i-1];                                                  //adds the bias of the node then Sj is done being calculated
+        Uj = 1/(1+Math.pow(Math.E,-Sj));
+        return Uj;
     }
     
     
