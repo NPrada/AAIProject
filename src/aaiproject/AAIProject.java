@@ -23,14 +23,10 @@ public class AAIProject {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        
-        
         double nodebias[][];                                                    //initialize table containing the bias of each node second parameter is the total number of nodes including the input node      
         nodebias = new double[4][5];                                            //   /nodenumber/Sj/f(Sj)/node type/  0=input 1=hidden 2=output
-        double weights[][];                                                    //initialize table containing the bias of each node second parameter is the total number of nodes including the input node      
+        double weights[][];                                                     //initialize table containing the bias of each node second parameter is the total number of nodes including the input node      
         nodebias = new double[4][5];
-        
-        
         
         Node w0_3 = new Node(1,1);                                              //set up all the lines that will be needed for the system
         Node w1_3 = new Node(3,1);
@@ -39,42 +35,62 @@ public class AAIProject {
         Node w1_4 = new Node(6,1);
         Node w2_4 = new Node(5,0);
         
-        //calculate the f(Sj) of node 0_3
-        double node3Sj;
-        node3Sj = w1_3.weight * w1_3.Ui + w2_3.weight * w2_3.Ui + w0_3.weight;    // this is Sj
-        double node3fSj;
-        node3fSj = 1/(1+Math.pow(Math.E,-node3Sj));
         
-        //calculate the f(Sj) of node 0_4
-        double node4Sj;
-        node4Sj = w1_4.weight * w1_4.Ui + w2_4.weight * w2_4.Ui + w0_4.weight;    // this is Sj
-        double node4fSj;
-        node4fSj = 1/(1+Math.pow(Math.E,-node4Sj));
+        double node3Uj = calcNodeUj(w1_3.weight , w1_3.Ui , w2_3.weight , w2_3.Ui , w0_3.weight);
+        double node4Uj = calcNodeUj(w1_4.weight , w1_4.Ui , w2_4.weight , w2_4.Ui , w0_4.weight);
+      
+                                                            
+        Node w3_5 = new Node(2,node3Uj);                                        //output node weights
+        Node w4_5 = new Node(4,node4Uj);
         
+        Node w0_5 = new Node(-3.92,0);                                          //output node
         
-        Node w0_5 = new Node(-3.92,1);                                          //output node
-        Node w3_5 = new Node(2,0.9820);                                         //output node weights
-        Node w4_5 = new Node(4,0.5);
+        double outputnodeUj = calcNodeUj(w3_5.weight , w3_5.Ui , w4_5.weight , w4_5.Ui , w0_5.weight);
+        w0_5.setUi(outputnodeUj);
         
         
         
+        //calculate delta for the output cell
+        w0_5.setDelta(calcOutputDelta(w0_5.Ui,1));
         
+        //calculate delta for node 3
+        w0_3.setDelta(calcDelta(w3_5.Ui,w3_5.weight,w0_5.delta));
         
-        System.out.println(calcHiddenNodeUj(w1_3.weight , w1_3.Ui , w2_3.weight , w2_3.Ui , w0_3.weight));
-        
-//        System.out.println(w1_3.weight);
-        System.out.println(node3fSj);
-//        System.out.println(node4fSj);
-        
+        //calculate delta for node 4
+        w0_4.setDelta(calcDelta(w4_5.Ui,w4_5.weight,w0_5.delta));
+            
     }
     
-//    public static void calcHiddenNodeUj(double w1weig, double w1Ui){
-//        int x;
-//        x = w1weig;
-//    }
-    public static double calcHiddenNodeUj(double... w){
+    //This calculates the nodes detal depending on the Uj of the node and the desired output
+    
+    
+    public static double calcDelta(double nodesUj, double linkWeight, double outputDelta){
+        double S;
+        double delta;
+        
+        S = nodesUj*(1-nodesUj);
+        delta = (linkWeight * outputDelta) * S;
+        
+        return delta;
+    
+    }
+    
+    public static double calcOutputDelta(double nodesUj, double desiredOutput){
+        double S;
+        double delta;
+        
+        S = nodesUj*(1-nodesUj);
+        delta = (desiredOutput - nodesUj) * S;
+     
+        return delta;
+    
+    }
+    
+    //this function requires the W1,2 then the Uj to be entered subsequently, 
+    //tne the last value is the bias value of the node
+    public static double calcNodeUj(double... w){                        
         double Sj =0; 
-        double Uj = 0;
+        double Uj;
         double inputs[];
         inputs = new double [50];
         int i = 0;
@@ -102,7 +118,7 @@ public class AAIProject {
         
         String csvFile = "CWDataStudent.csv";
         BufferedReader br = null;
-        String line = "";
+        String line;
         String cvsSplitBy = ",";
 
         try {
