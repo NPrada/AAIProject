@@ -29,15 +29,21 @@ public class AAIProject {
         try {
 
             br = new BufferedReader(new FileReader(csvFile));
-            while ((line = br.readLine()) != null) {
-
-                // use comma as separator
-                String[] country = line.split(cvsSplitBy);
-
-                System.out.println("Country [AREA= " + country[0] + " , BFIHOST=" + country[1] + " , FARL= " + country[2] + " , FPEXT= " + country[3] + 
-                        " ,  LDP= " + country[4] + " , PROPWET= " + country[5] +"]");
-              
+            
+            for(int i = 0; i < 587; i++)  {                                     //chanage the 587 to you dataset length nad also on line 44
+               
+                line = br.readLine();                                           //reads the current line of the csv file
+                String[] rawdata = line.split(cvsSplitBy);                      //System.out.println(line + "    //          " + i); debug stuff
+                                                                                
+                double trainingdata[][];
+                trainingdata = new double[587][9];
+                
+                for(int x = 0; x < (trainingdata[i].length)-1; x++){            //loops through 9 times, or the number of headers and adds each number into the 
+                    
+                    trainingdata[i][x]=Double.parseDouble(rawdata[x]);
+                   }
             }
+            System.out.println("Your csv file has been read succesfully!");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
