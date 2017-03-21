@@ -21,15 +21,15 @@ public class Node {
         Ui = startUi;
         }
         
-        public void setWeight(int newValue) {
+        public void setWeight(double newValue) {
         weight = newValue;
         }
         
-        public void setDelta(int newValue) {
+        public void setDelta(double newValue) {
             delta = newValue;
         }
         
-        public void setUi(int newValue) {
+        public void setUi(double newValue) {
             Ui = newValue;
         }
         
