@@ -28,66 +28,66 @@ public class AAIProject {
         //unless it is a bias arrow then the second parameter is always 1
         
         //hidden nodes
-        Node w0_10 = new Node(calcRand(20,-10),1);  
-        Node w0_11 = new Node(calcRand(20,-10),1);   
-        Node w0_12 = new Node(calcRand(20,-10),1);  
-        Node w0_13 = new Node(calcRand(20,-10),1);  
-        Node w0_14 = new Node(calcRand(20,-10),1);                         
+        Node w0_10 = new Node(calcRand(),1);  
+        Node w0_11 = new Node(calcRand(),1);   
+        Node w0_12 = new Node(calcRand(),1);  
+        Node w0_13 = new Node(calcRand(),1);  
+        Node w0_14 = new Node(calcRand(),1);                         
         //vectors  from inputs to each hidden node                                //for these the Ui is the input at their starting node    
-        Node w1_10 = new Node(calcRand(20,0),1);                                
-        Node w2_10 = new Node(calcRand(20,0),0);
-        Node w3_10 = new Node(calcRand(20,0),1);   
-        Node w4_10 = new Node(calcRand(20,0),1);   
-        Node w5_10 = new Node(calcRand(20,0),1);   
-        Node w6_10 = new Node(calcRand(20,0),1);   
-        Node w7_10 = new Node(calcRand(20,0),1);   
-        Node w8_10 = new Node(calcRand(20,0),1);   
+        Node w1_10 = new Node(calcPosRand(),1);                                
+        Node w2_10 = new Node(calcPosRand(),0);
+        Node w3_10 = new Node(calcPosRand(),1);   
+        Node w4_10 = new Node(calcPosRand(),1);   
+        Node w5_10 = new Node(calcPosRand(),1);   
+        Node w6_10 = new Node(calcPosRand(),1);   
+        Node w7_10 = new Node(calcPosRand(),1);   
+        Node w8_10 = new Node(calcPosRand(),1);   
         
-        Node w1_11 = new Node(calcRand(20,0),1);                                
-        Node w2_11 = new Node(calcRand(20,0),0);
-        Node w3_11 = new Node(calcRand(20,0),1);   
-        Node w4_11 = new Node(calcRand(20,0),1);   
-        Node w5_11 = new Node(calcRand(20,0),1);   
-        Node w6_11 = new Node(calcRand(20,0),1);   
-        Node w7_11 = new Node(calcRand(20,0),1);   
-        Node w8_11 = new Node(calcRand(20,0),1);
+        Node w1_11 = new Node(calcPosRand(),1);                                
+        Node w2_11 = new Node(calcPosRand(),0);
+        Node w3_11 = new Node(calcPosRand(),1);   
+        Node w4_11 = new Node(calcPosRand(),1);   
+        Node w5_11 = new Node(calcPosRand(),1);   
+        Node w6_11 = new Node(calcPosRand(),1);   
+        Node w7_11 = new Node(calcPosRand(),1);   
+        Node w8_11 = new Node(calcPosRand(),1);
         
-        Node w1_12 = new Node(calcRand(20,0),1);                                
-        Node w2_12 = new Node(calcRand(20,0),0);
-        Node w3_12 = new Node(calcRand(20,0),1);   
-        Node w4_12 = new Node(calcRand(20,0),1);   
-        Node w5_12 = new Node(calcRand(20,0),1);   
-        Node w6_12 = new Node(calcRand(20,0),1);   
-        Node w7_12 = new Node(calcRand(20,0),1);   
-        Node w8_12 = new Node(calcRand(20,0),1);
+        Node w1_12 = new Node(calcPosRand(),1);                                
+        Node w2_12 = new Node(calcPosRand(),0);
+        Node w3_12 = new Node(calcPosRand(),1);   
+        Node w4_12 = new Node(calcPosRand(),1);   
+        Node w5_12 = new Node(calcPosRand(),1);   
+        Node w6_12 = new Node(calcPosRand(),1);   
+        Node w7_12 = new Node(calcPosRand(),1);   
+        Node w8_12 = new Node(calcPosRand(),1);
         
-        Node w1_13 = new Node(calcRand(20,0),1);                                
-        Node w2_13 = new Node(calcRand(20,0),0);
-        Node w3_13 = new Node(calcRand(20,0),1);   
-        Node w4_13 = new Node(calcRand(20,0),1);   
-        Node w5_13 = new Node(calcRand(20,0),1);   
-        Node w6_13 = new Node(calcRand(20,0),1);   
-        Node w7_13 = new Node(calcRand(20,0),1);   
-        Node w8_13 = new Node(calcRand(20,0),1);
+        Node w1_13 = new Node(calcPosRand(),1);                                
+        Node w2_13 = new Node(calcPosRand(),0);
+        Node w3_13 = new Node(calcPosRand(),1);   
+        Node w4_13 = new Node(calcPosRand(),1);   
+        Node w5_13 = new Node(calcPosRand(),1);   
+        Node w6_13 = new Node(calcPosRand(),1);   
+        Node w7_13 = new Node(calcPosRand(),1);   
+        Node w8_13 = new Node(calcPosRand(),1);
         
-        Node w1_14 = new Node(calcRand(20,0),1);                                
-        Node w2_14 = new Node(calcRand(20,0),0);
-        Node w3_14 = new Node(calcRand(20,0),1);   
-        Node w4_14 = new Node(calcRand(20,0),1);   
-        Node w5_14 = new Node(calcRand(20,0),1);   
-        Node w6_14 = new Node(calcRand(20,0),1);   
-        Node w7_14 = new Node(calcRand(20,0),1);   
-        Node w8_14 = new Node(calcRand(20,0),1);
+        Node w1_14 = new Node(calcPosRand(),1);                                
+        Node w2_14 = new Node(calcPosRand(),0);
+        Node w3_14 = new Node(calcPosRand(),1);   
+        Node w4_14 = new Node(calcPosRand(),1);   
+        Node w5_14 = new Node(calcPosRand(),1);   
+        Node w6_14 = new Node(calcPosRand(),1);   
+        Node w7_14 = new Node(calcPosRand(),1);   
+        Node w8_14 = new Node(calcPosRand(),1);
         
         //vecors from hidden nodes to output node                               //for these the Ui needs to be calculated on the first forward pass hence the ui is 0
-        Node w10_20 = new Node(calcRand(20,0),0);                                
-        Node w11_20 = new Node(calcRand(20,0),0);
-        Node w12_20 = new Node(calcRand(20,0),0);
-        Node w13_20 = new Node(calcRand(20,0),0);
-        Node w14_20 = new Node(calcRand(20,0),0);
+        Node w10_20 = new Node(calcPosRand(),0);                                
+        Node w11_20 = new Node(calcPosRand(),0);
+        Node w12_20 = new Node(calcPosRand(),0);
+        Node w13_20 = new Node(calcPosRand(),0);
+        Node w14_20 = new Node(calcPosRand(),0);
         
         //output node weight
-        Node w0_20 = new Node(calcRand(20,0),0);                                
+        Node w0_20 = new Node(calcRand(),0);                                
         
         //start a for loop that will do the backpropagation process over and over
         for (int i = 0; i < 100; i++) {                                         //sets the inputs into an array
@@ -199,6 +199,28 @@ public class AAIProject {
             w0_20.setNewWeight(updateWeight(w0_20.weight,1,w0_20.delta));       //middle parameter always stays 2 beceause this is a bias
         }
     }
+     //this generates a random number for me, if parameters are max 10 and min -5
+    //it will return numbers between 5 & -5
+    public static double calcRand() {                 
+        int max =  20;
+        int min = -10;
+        Random rand = new Random();
+        double randNum = (rand.nextInt(max) + min);                                  
+        return randNum;
+        
+    }
+    //calculates a positive only random number
+    public static double calcPosRand() {                 
+        int max =  20;
+        int min =  0;
+        Random rand = new Random();
+        double randNum = (rand.nextInt(max) + min);                                  
+        return randNum;
+        
+    }
+    
+   
+        
     
     //This calculates the nodes detal depending on the Uj of the node and the desired output
     public static double updateWeight(double currentWeight, double Ui,double pointNodeDelta) {
@@ -253,15 +275,8 @@ public class AAIProject {
         Uj = 1/(1+Math.pow(Math.E,-Sj));
         return Uj;
     }
-    //this generates a random number for me, if parameters are max 10 and min -5
-    //it will return numbers between 5 & -5
-    public static double calcRand(int max,double min) {                 
-                                                                    
-        Random rand = new Random();
-        double randNum = (rand.nextInt(max) + min);                                  
-        return randNum;
-        
-    }
+   
+    
     
     public static void readCSV() {
         
