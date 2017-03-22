@@ -200,7 +200,7 @@ public class AAIProject {
         }
         //testing 
         double x[][] = readCSV();
-        System.out.println(x[1][8]);
+        //System.out.println(x[1][8]);
         standardiseData(x);
     }
      //this generates a random number for me, if parameters are max 10 and min -5
@@ -295,7 +295,7 @@ public class AAIProject {
                 line = br.readLine();                                           //reads the current line of the csv file
                 String[] rawdata = line.split(cvsSplitBy);                      //System.out.println(line + "    //          " + i); debug stuff
                                                                                          
-                for(int x = 0; x < (trainingdata[i].length); x++){            //loops through 9 times, or the number of headers and adds each number into the 
+                for(int x = 0; x < (trainingdata[i].length); x++){              //loops through 9 times, or the number of headers and adds each number into the 
                     
                     trainingdata[i][x]=Double.parseDouble(rawdata[x]);
                    }
@@ -319,21 +319,40 @@ public class AAIProject {
         
     }
     
-    public static void standardiseData(double trainingData[][]){
+    public static double[][] standardiseData(double trainingData[][]){
         
         int columnsNum = 9;
         //int columnsNum = trainingData[0].length;
         double [] maxColValue = new double[columnsNum];
         double [] minColValue = new double[columnsNum];
         
-        for (int i =0; i < columnsNum;i++){                                     //used to initialize the two arrays that will store the min and max
+        for (int i =0; i < columnsNum;i++){                                     //used to just initialize the two arrays that will store the min and max
             maxColValue[i] = trainingData[0][i]; 
             minColValue[i] = trainingData[0][i]; 
         }
-        System.out.println("max");
-        System.out.println(maxColValue[0]);
-        System.out.println("min");
-        System.out.println(minColValue[7]);
+        
+        for (double[] row : trainingData) {                                     //these two nested for loops fetch the min & max values of each column and stores it into an array
+            
+            for (int q =0; q < row.length;q++){
+                
+                if (row[q]> maxColValue[q]){                                    //check if the current row has a bigger value if so change it
+                    maxColValue[q] = row[q];
+                }
+                if (row[q]< minColValue[q]){                                    //check if the current row has a smaller value if so change it
+                    minColValue[q] = row[q];
+                }
+            }
+        }
+       
+        for (double[] row : trainingData) { 
+                    
+            for (int z =0; z < row.length;z++){
+                row[z] =(row[z] - minColValue[z])/(maxColValue[z] - minColValue[z]);   
+            }   
+            //System.out.println(row[0] + "   " + row[1] + "   " + row[2] + "   " + row[3] + "   " + row[4] + "   " + row[5] + "   " + row[6] + "   " + row[7] + "   " + row[8]);
+        }
+        
+        return trainingData;
     }
     
     
