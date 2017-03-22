@@ -113,10 +113,10 @@ public class AAIProject {
 
             //set weights of all the vectors leaving that node eg node3Uj
             w10_20.setUi(node10Uj);
-            w11_20.setUi(node10Uj); 
-            w12_20.setUi(node10Uj); 
-            w13_20.setUi(node10Uj); 
-            w14_20.setUi(node10Uj); 
+            w11_20.setUi(node11Uj); 
+            w12_20.setUi(node12Uj); 
+            w13_20.setUi(node13Uj); 
+            w14_20.setUi(node14Uj); 
             
             //set the Ui of the outputnode
             double outputnodeUj = calcNodeUj(w10_20.weight,w10_20.Ui,w11_20.weight,w11_20.Ui,w12_20.weight,w12_20.Ui,w13_20.weight,w13_20.Ui,w14_20.weight,w14_20.Ui, w0_20.weight);
@@ -198,6 +198,10 @@ public class AAIProject {
             //output node
             w0_20.setNewWeight(updateWeight(w0_20.weight,1,w0_20.delta));       //middle parameter always stays 2 beceause this is a bias
         }
+        //testing 
+        double x[][] = readCSV();
+        System.out.println(x[1][8]);
+        standardiseData(x);
     }
      //this generates a random number for me, if parameters are max 10 and min -5
     //it will return numbers between 5 & -5
@@ -218,9 +222,6 @@ public class AAIProject {
         return randNum;
         
     }
-    
-   
-        
     
     //This calculates the nodes detal depending on the Uj of the node and the desired output
     public static double updateWeight(double currentWeight, double Ui,double pointNodeDelta) {
@@ -276,34 +277,30 @@ public class AAIProject {
         return Uj;
     }
    
-    
-    
-    public static void readCSV() {
+    public static double[][] readCSV() {
         
         String csvFile = "CWDataStudent.csv";
         BufferedReader br = null;
         String line;
         String cvsSplitBy = ",";
-
+        double trainingdata[][];
+        trainingdata = new double[587][9];
+        
         try {
 
             br = new BufferedReader(new FileReader(csvFile));
-            
+              
             for(int i = 0; i < 587; i++)  {                                     //chanage the 587 to you dataset length nad also on line 44
                
                 line = br.readLine();                                           //reads the current line of the csv file
                 String[] rawdata = line.split(cvsSplitBy);                      //System.out.println(line + "    //          " + i); debug stuff
-                                                                                
-                double trainingdata[][];
-                trainingdata = new double[587][9];
-                
-                for(int x = 0; x < (trainingdata[i].length)-1; x++){            //loops through 9 times, or the number of headers and adds each number into the 
+                                                                                         
+                for(int x = 0; x < (trainingdata[i].length); x++){            //loops through 9 times, or the number of headers and adds each number into the 
                     
                     trainingdata[i][x]=Double.parseDouble(rawdata[x]);
                    }
-            }
-            System.out.println("Your csv file has been read succesfully!");
-
+            }   
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -317,6 +314,26 @@ public class AAIProject {
                 }
             }
         }
+        System.out.println("Your csv file has been read succesfully!");
+        return trainingdata;
+        
+    }
+    
+    public static void standardiseData(double trainingData[][]){
+        
+        int columnsNum = 9;
+        //int columnsNum = trainingData[0].length;
+        double [] maxColValue = new double[columnsNum];
+        double [] minColValue = new double[columnsNum];
+        
+        for (int i =0; i < columnsNum;i++){                                     //used to initialize the two arrays that will store the min and max
+            maxColValue[i] = trainingData[0][i]; 
+            minColValue[i] = trainingData[0][i]; 
+        }
+        System.out.println("max");
+        System.out.println(maxColValue[0]);
+        System.out.println("min");
+        System.out.println(minColValue[7]);
     }
     
     
