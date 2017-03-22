@@ -9,9 +9,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 /**
  *
- * @author Nico
+ * @author Niccolo Prada
  */
 
 
@@ -21,26 +22,31 @@ public class AAIProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        //start by initializong all the components that I need for the backprop 
         
-        double nodebias[][];                                                    //initialize table containing the bias of each node second parameter is the total number of nodes including the input node      
-        nodebias = new double[4][5];                                            //   /nodenumber/Sj/f(Sj)/node type/  0=input 1=hidden 2=output
-        double weights[][];                                                     //initialize table containing the bias of each node second parameter is the total number of nodes including the input node      
-        nodebias = new double[4][5];
+        //set up all the arrows that will be needed for the ANN inluding the bias
+        //the second parameter needs to be set up to take the input from the table
+        //unless it is a bias arrow then the second parameter is always 1
         
-        Node w0_3 = new Node(1,1);                                              //set up all the lines that will be needed for the system
-        Node w1_3 = new Node(3,1);
-        Node w2_3 = new Node(4,0);
-        Node w0_4 = new Node(-6,1);
-        Node w1_4 = new Node(6,1);
-        Node w2_4 = new Node(5,0);
+        //hidden nodes
+        Node w0_3 = new Node(calcRand(10,-5),1);  
+        Node w0_4 = new Node(calcRand(10,-5),1);                         
+        //arrows from inputs to each hidden node                                
+        Node w1_3 = new Node(calcRand(10,-5),1);                                
+        Node w2_3 = new Node(calcRand(10,-5),0);                              
         
-        Node w3_5 = new Node(2,0);                                              //arrows to output node weights
-        Node w4_5 = new Node(4,0);
+        Node w1_4 = new Node(calcRand(10,-5),1);
+        Node w2_4 = new Node(calcRand(10,-5),0);
         
-        Node w0_5 = new Node(-3.92,0);                                          //output node weights
+        //arrows from hidden nodes to output node
+        Node w3_5 = new Node(calcRand(10,-5),0);                                
+        Node w4_5 = new Node(calcRand(10,-5),0);
         
-        for (int i = 0; i < 100; i++) {                                                  //sets the inputs into an array
+        //output node weight
+        Node w0_5 = new Node(calcRand(10,-5),0);                                
+        
+        //start a for loop that will do the backpropagation process over and over
+        for (int i = 0; i < 100; i++) {                                         //sets the inputs into an array
            
             System.out.println("These are the current weights");
             System.out.println(w0_3.weight);
@@ -149,8 +155,15 @@ public class AAIProject {
         Uj = 1/(1+Math.pow(Math.E,-Sj));
         return Uj;
     }
-    
-    
+    //this generates a random number for me, if parameters are max 10 and min -5
+    //it will return numbers between 5 & -5
+    public static double calcRand(int max,double min) {                 
+                                                                    
+        Random rand = new Random();
+        double randNum = (rand.nextInt(max) + min);                                  
+        return randNum;
+        
+    }
     
     public static void readCSV() {
         
