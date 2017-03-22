@@ -321,8 +321,7 @@ public class AAIProject {
     
     public static double[][] standardiseData(double trainingData[][]){
         
-        int columnsNum = 9;
-        //int columnsNum = trainingData[0].length;
+        int columnsNum = trainingData[0].length;
         double [] maxColValue = new double[columnsNum];
         double [] minColValue = new double[columnsNum];
         
@@ -352,7 +351,7 @@ public class AAIProject {
             //System.out.println(row[0] + "   " + row[1] + "   " + row[2] + "   " + row[3] + "   " + row[4] + "   " + row[5] + "   " + row[6] + "   " + row[7] + "   " + row[8]);
         }
         
-        return trainingData;
+        return trainingData; 
     }
     
     
