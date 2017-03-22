@@ -31,16 +31,16 @@ public class AAIProject {
         //hidden nodes
         Node w0_3 = new Node(calcRand(10,-5),1);  
         Node w0_4 = new Node(calcRand(10,-5),1);                         
-        //arrows from inputs to each hidden node                                
-        Node w1_3 = new Node(calcRand(10,-5),1);                                
-        Node w2_3 = new Node(calcRand(10,-5),0);                              
+        //arrows from inputs to each hidden node                                //for these the Ui is the input at their starting node    
+        Node w1_3 = new Node(calcRand(10,0),1);                                
+        Node w2_3 = new Node(calcRand(10,0),0);                              
         
-        Node w1_4 = new Node(calcRand(10,-5),1);
-        Node w2_4 = new Node(calcRand(10,-5),0);
+        Node w1_4 = new Node(calcRand(10,0),1);
+        Node w2_4 = new Node(calcRand(10,0),0);
         
-        //arrows from hidden nodes to output node
-        Node w3_5 = new Node(calcRand(10,-5),0);                                
-        Node w4_5 = new Node(calcRand(10,-5),0);
+        //arrows from hidden nodes to output node                               //for these the Ui needs to be calculated on the first forward pass hence the ui is 0
+        Node w3_5 = new Node(calcRand(10,0),0);                                
+        Node w4_5 = new Node(calcRand(10,0),0);
         
         //output node weight
         Node w0_5 = new Node(calcRand(10,-5),0);                                
@@ -141,7 +141,6 @@ public class AAIProject {
         
         for (double arg : w) {                                                  //sets the inputs into an array
             inputs[i] = arg;
-            
             i++;
         }
         
