@@ -21,6 +21,13 @@ public class AAIProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //read the data and standardise it 
+        double x[][] = readCSV();                                               //System.out.println(x[1][8]);
+        double dataset[][] = standardiseData(x);                                //System.out.println(dataset[0][0]);
+        // 1        2     3       4      5      6           7       8      9
+        //AREA	BFIHOST	 FARL	FPEXT	LDP   PROPWET	RMED-1D	  SAAR	Index flood
+        System.out.println(x[0][8]);
+
         //start by initializong all the components that I need for the backprop 
         
         //set up all the arrows that will be needed for the ANN inluding the bias
@@ -34,57 +41,57 @@ public class AAIProject {
         Node w0_13 = new Node(calcRand(),1);  
         Node w0_14 = new Node(calcRand(),1);                         
         //vectors  from inputs to each hidden node                                //for these the Ui is the input at their starting node    
-        Node w1_10 = new Node(calcPosRand(),1);                                
+        Node w1_10 = new Node(calcPosRand(),0);                                
         Node w2_10 = new Node(calcPosRand(),0);
-        Node w3_10 = new Node(calcPosRand(),1);   
-        Node w4_10 = new Node(calcPosRand(),1);   
-        Node w5_10 = new Node(calcPosRand(),1);   
-        Node w6_10 = new Node(calcPosRand(),1);   
-        Node w7_10 = new Node(calcPosRand(),1);   
-        Node w8_10 = new Node(calcPosRand(),1);   
+        Node w3_10 = new Node(calcPosRand(),0);   
+        Node w4_10 = new Node(calcPosRand(),0);   
+        Node w5_10 = new Node(calcPosRand(),0);   
+        Node w6_10 = new Node(calcPosRand(),0);   
+        Node w7_10 = new Node(calcPosRand(),0);   
+        Node w8_10 = new Node(calcPosRand(),0);   
         
-        Node w1_11 = new Node(calcPosRand(),1);                                
+        Node w1_11 = new Node(calcPosRand(),0);                                
         Node w2_11 = new Node(calcPosRand(),0);
-        Node w3_11 = new Node(calcPosRand(),1);   
-        Node w4_11 = new Node(calcPosRand(),1);   
-        Node w5_11 = new Node(calcPosRand(),1);   
-        Node w6_11 = new Node(calcPosRand(),1);   
-        Node w7_11 = new Node(calcPosRand(),1);   
-        Node w8_11 = new Node(calcPosRand(),1);
+        Node w3_11 = new Node(calcPosRand(),0);   
+        Node w4_11 = new Node(calcPosRand(),0);   
+        Node w5_11 = new Node(calcPosRand(),0);   
+        Node w6_11 = new Node(calcPosRand(),0);   
+        Node w7_11 = new Node(calcPosRand(),0);   
+        Node w8_11 = new Node(calcPosRand(),0);
         
-        Node w1_12 = new Node(calcPosRand(),1);                                
+        Node w1_12 = new Node(calcPosRand(),0);                                
         Node w2_12 = new Node(calcPosRand(),0);
-        Node w3_12 = new Node(calcPosRand(),1);   
-        Node w4_12 = new Node(calcPosRand(),1);   
-        Node w5_12 = new Node(calcPosRand(),1);   
-        Node w6_12 = new Node(calcPosRand(),1);   
-        Node w7_12 = new Node(calcPosRand(),1);   
-        Node w8_12 = new Node(calcPosRand(),1);
+        Node w3_12 = new Node(calcPosRand(),0);   
+        Node w4_12 = new Node(calcPosRand(),0);   
+        Node w5_12 = new Node(calcPosRand(),0);   
+        Node w6_12 = new Node(calcPosRand(),0);   
+        Node w7_12 = new Node(calcPosRand(),0);   
+        Node w8_12 = new Node(calcPosRand(),0);
         
-        Node w1_13 = new Node(calcPosRand(),1);                                
+        Node w1_13 = new Node(calcPosRand(),0);                                
         Node w2_13 = new Node(calcPosRand(),0);
-        Node w3_13 = new Node(calcPosRand(),1);   
-        Node w4_13 = new Node(calcPosRand(),1);   
-        Node w5_13 = new Node(calcPosRand(),1);   
-        Node w6_13 = new Node(calcPosRand(),1);   
-        Node w7_13 = new Node(calcPosRand(),1);   
-        Node w8_13 = new Node(calcPosRand(),1);
+        Node w3_13 = new Node(calcPosRand(),0);   
+        Node w4_13 = new Node(calcPosRand(),0);   
+        Node w5_13 = new Node(calcPosRand(),0);   
+        Node w6_13 = new Node(calcPosRand(),0);   
+        Node w7_13 = new Node(calcPosRand(),0);   
+        Node w8_13 = new Node(calcPosRand(),0);
         
-        Node w1_14 = new Node(calcPosRand(),1);                                
+        Node w1_14 = new Node(calcPosRand(),0);                                
         Node w2_14 = new Node(calcPosRand(),0);
-        Node w3_14 = new Node(calcPosRand(),1);   
-        Node w4_14 = new Node(calcPosRand(),1);   
-        Node w5_14 = new Node(calcPosRand(),1);   
-        Node w6_14 = new Node(calcPosRand(),1);   
-        Node w7_14 = new Node(calcPosRand(),1);   
-        Node w8_14 = new Node(calcPosRand(),1);
+        Node w3_14 = new Node(calcPosRand(),0);   
+        Node w4_14 = new Node(calcPosRand(),0);   
+        Node w5_14 = new Node(calcPosRand(),0);   
+        Node w6_14 = new Node(calcPosRand(),0);   
+        Node w7_14 = new Node(calcPosRand(),0);   
+        Node w8_14 = new Node(calcPosRand(),0);
         
         //vecors from hidden nodes to output node                               //for these the Ui needs to be calculated on the first forward pass hence the ui is 0
         Node w10_20 = new Node(calcPosRand(),0);                                
         Node w11_20 = new Node(calcPosRand(),0);
         Node w12_20 = new Node(calcPosRand(),0);
         Node w13_20 = new Node(calcPosRand(),0);
-        Node w14_20 = new Node(calcPosRand(),0);
+        Node w14_20 = new Node(calcPosRand(),0); 
         
         //output node weight
         Node w0_20 = new Node(calcRand(),0);                                
@@ -92,17 +99,53 @@ public class AAIProject {
         //start a for loop that will do the backpropagation process over and over
         for (int i = 0; i < 100; i++) {                                         //sets the inputs into an array
            
-//            System.out.println("These are the current weights");
-//            System.out.println(w0_3.weight);
-//            System.out.println(w1_3.weight);
-//            System.out.println(w2_3.weight);
-//            System.out.println(w0_4.weight);
-//            System.out.println(w1_4.weight);
-//            System.out.println(w2_4.weight);
-//            System.out.println(w0_5.weight);
-//            System.out.println(w3_5.weight);
-//            System.out.println(w4_5.weight);
-            
+        // here I set the Ui of all the input --> hidden node vectors to the correct data part      
+        w1_10.setUi(dataset[0][0]);
+        w2_10.setUi(dataset[0][1]);
+        w3_10.setUi(dataset[0][2]);
+        w4_10.setUi(dataset[0][3]);
+        w5_10.setUi(dataset[0][4]);
+        w6_10.setUi(dataset[0][5]);
+        w7_10.setUi(dataset[0][6]);
+        w8_10.setUi(dataset[0][7]);
+        
+        w1_11.setUi(dataset[0][0]);
+        w2_11.setUi(dataset[0][1]);
+        w3_11.setUi(dataset[0][2]);
+        w4_11.setUi(dataset[0][3]);
+        w5_11.setUi(dataset[0][4]);
+        w6_11.setUi(dataset[0][5]);
+        w7_11.setUi(dataset[0][6]);
+        w8_11.setUi(dataset[0][7]);
+        
+        w1_12.setUi(dataset[0][0]);
+        w2_12.setUi(dataset[0][1]);
+        w3_12.setUi(dataset[0][2]);
+        w4_12.setUi(dataset[0][3]);
+        w5_12.setUi(dataset[0][4]);
+        w6_12.setUi(dataset[0][5]);
+        w7_12.setUi(dataset[0][6]);
+        w8_12.setUi(dataset[0][7]);
+        
+        w1_13.setUi(dataset[0][0]);
+        w2_13.setUi(dataset[0][1]);
+        w3_13.setUi(dataset[0][2]);
+        w4_13.setUi(dataset[0][3]);
+        w5_13.setUi(dataset[0][4]);
+        w6_13.setUi(dataset[0][5]);
+        w7_13.setUi(dataset[0][6]);
+        w8_13.setUi(dataset[0][7]);
+        
+        w1_14.setUi(dataset[0][0]);
+        w2_14.setUi(dataset[0][1]);
+        w3_14.setUi(dataset[0][2]);
+        w4_14.setUi(dataset[0][3]);
+        w5_14.setUi(dataset[0][4]);
+        w6_14.setUi(dataset[0][5]);
+        w7_14.setUi(dataset[0][6]);
+        w8_14.setUi(dataset[0][7]);
+        
+        System.out.print(w2_10.Ui);
             //generate weights for all the vectors to the output
             double node10Uj = calcNodeUj(w1_10.weight,w1_10.Ui,w2_10.weight,w2_10.Ui,w3_10.weight,w3_10.Ui,w4_10.weight,w4_10.Ui,w5_10.weight,w5_10.Ui,w6_10.weight,w6_10.Ui,w7_10.weight,w7_10.Ui,w8_10.weight,w8_10.Ui,  w0_10.weight);
             double node11Uj = calcNodeUj(w1_11.weight,w1_11.Ui,w2_11.weight,w2_11.Ui,w3_11.weight,w3_11.Ui,w4_11.weight,w4_11.Ui,w5_11.weight,w5_11.Ui,w6_11.weight,w6_11.Ui,w7_11.weight,w7_11.Ui,w8_11.weight,w8_11.Ui,  w0_11.weight);
@@ -124,7 +167,7 @@ public class AAIProject {
             System.out.println("This the the ui: "+w0_20.Ui);
 
             //calculate delta for the output cell
-            w0_20.setDelta(calcOutputDelta(w0_20.Ui,1));                          // the second parameter is what we want this ANN to train towards
+            w0_20.setDelta(calcOutputDelta(w0_20.Ui,dataset[0][8]));                        // the second parameter is what we want this ANN to train towards
 
             //calculate delta for node 3
             w0_10.setDelta(calcDelta(w10_20.Ui,w10_20.weight,w0_20.delta));
@@ -136,7 +179,7 @@ public class AAIProject {
             //do the pass to update all the weights
             
             //hidden node's bias
-            w0_10.setNewWeight(updateWeight(w0_10.weight,1,w0_10.delta));          //bias vecotrs have an Ui of 1
+            w0_10.setNewWeight(updateWeight(w0_10.weight,1,w0_10.delta));       //bias vecotrs have an Ui of 1
             w0_11.setNewWeight(updateWeight(w0_11.weight,1,w0_11.delta));
             w0_12.setNewWeight(updateWeight(w0_12.weight,1,w0_12.delta));
             w0_13.setNewWeight(updateWeight(w0_13.weight,1,w0_13.delta));
@@ -196,12 +239,10 @@ public class AAIProject {
             w13_20.setNewWeight(updateWeight(w13_20.weight,w13_20.Ui,w0_20.delta));
             w14_20.setNewWeight(updateWeight(w14_20.weight,w14_20.Ui,w0_20.delta));
             //output node
-            w0_20.setNewWeight(updateWeight(w0_20.weight,1,w0_20.delta));       //middle parameter always stays 2 beceause this is a bias
+            w0_20.setNewWeight(updateWeight(w0_20.weight,1,w0_20.delta));       //middle parameter always stays 1 beceause this is a bias
         }
         //testing 
-        double x[][] = readCSV();
-        //System.out.println(x[1][8]);
-        standardiseData(x);
+       
     }
      //this generates a random number for me, if parameters are max 10 and min -5
     //it will return numbers between 5 & -5
@@ -342,12 +383,14 @@ public class AAIProject {
                 }
             }
         }
-       
+       //System.out.println(maxColValue[0] + "   " + maxColValue[1] + "   " + maxColValue[2] + "   " + maxColValue[3] + "   " + maxColValue[4] + "   " + maxColValue[5] + "   " + maxColValue[6] + "   " + maxColValue[7] + "   " + maxColValue[8]);
+       //System.out.println(minColValue[0] + "   " + minColValue[1] + "   " + minColValue[2] + "   " + minColValue[3] + "   " + minColValue[4] + "   " + minColValue[5] + "   " + minColValue[6] + "   " + minColValue[7] + "   " + minColValue[8]);
         for (double[] row : trainingData) { 
-                    
+           
             for (int z =0; z < row.length;z++){
-                row[z] =(row[z] - minColValue[z])/(maxColValue[z] - minColValue[z]);   
+                row[z] =(row[z] - minColValue[z]) / (maxColValue[z] - minColValue[z]);   
             }   
+            
             //System.out.println(row[0] + "   " + row[1] + "   " + row[2] + "   " + row[3] + "   " + row[4] + "   " + row[5] + "   " + row[6] + "   " + row[7] + "   " + row[8]);
         }
         
