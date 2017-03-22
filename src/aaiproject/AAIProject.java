@@ -100,51 +100,51 @@ public class AAIProject {
         for (int i = 0; i < 100; i++) {                                         //sets the inputs into an array
            
         // here I set the Ui of all the input --> hidden node vectors to the correct data part      
-        w1_10.setUi(dataset[0][0]);
-        w2_10.setUi(dataset[0][1]);
-        w3_10.setUi(dataset[0][2]);
-        w4_10.setUi(dataset[0][3]);
-        w5_10.setUi(dataset[0][4]);
-        w6_10.setUi(dataset[0][5]);
-        w7_10.setUi(dataset[0][6]);
-        w8_10.setUi(dataset[0][7]);
+        w1_10.setUi(dataset[i][0]);
+        w2_10.setUi(dataset[i][1]);
+        w3_10.setUi(dataset[i][2]);
+        w4_10.setUi(dataset[i][3]);
+        w5_10.setUi(dataset[i][4]);
+        w6_10.setUi(dataset[i][5]);
+        w7_10.setUi(dataset[i][6]);
+        w8_10.setUi(dataset[i][7]);
         
-        w1_11.setUi(dataset[0][0]);
-        w2_11.setUi(dataset[0][1]);
-        w3_11.setUi(dataset[0][2]);
-        w4_11.setUi(dataset[0][3]);
-        w5_11.setUi(dataset[0][4]);
-        w6_11.setUi(dataset[0][5]);
-        w7_11.setUi(dataset[0][6]);
-        w8_11.setUi(dataset[0][7]);
+        w1_11.setUi(dataset[i][0]);
+        w2_11.setUi(dataset[i][1]);
+        w3_11.setUi(dataset[i][2]);
+        w4_11.setUi(dataset[i][3]);
+        w5_11.setUi(dataset[i][4]);
+        w6_11.setUi(dataset[i][5]);
+        w7_11.setUi(dataset[i][6]);
+        w8_11.setUi(dataset[i][7]);
         
-        w1_12.setUi(dataset[0][0]);
-        w2_12.setUi(dataset[0][1]);
-        w3_12.setUi(dataset[0][2]);
-        w4_12.setUi(dataset[0][3]);
-        w5_12.setUi(dataset[0][4]);
-        w6_12.setUi(dataset[0][5]);
-        w7_12.setUi(dataset[0][6]);
-        w8_12.setUi(dataset[0][7]);
+        w1_12.setUi(dataset[i][0]);
+        w2_12.setUi(dataset[i][1]);
+        w3_12.setUi(dataset[i][2]);
+        w4_12.setUi(dataset[i][3]);
+        w5_12.setUi(dataset[i][4]);
+        w6_12.setUi(dataset[i][5]);
+        w7_12.setUi(dataset[i][6]);
+        w8_12.setUi(dataset[i][7]);
         
-        w1_13.setUi(dataset[0][0]);
-        w2_13.setUi(dataset[0][1]);
-        w3_13.setUi(dataset[0][2]);
-        w4_13.setUi(dataset[0][3]);
-        w5_13.setUi(dataset[0][4]);
-        w6_13.setUi(dataset[0][5]);
-        w7_13.setUi(dataset[0][6]);
-        w8_13.setUi(dataset[0][7]);
+        w1_13.setUi(dataset[i][0]);
+        w2_13.setUi(dataset[i][1]);
+        w3_13.setUi(dataset[i][2]);
+        w4_13.setUi(dataset[i][3]);
+        w5_13.setUi(dataset[i][4]);
+        w6_13.setUi(dataset[i][5]);
+        w7_13.setUi(dataset[i][6]);
+        w8_13.setUi(dataset[i][7]);
         
-        w1_14.setUi(dataset[0][0]);
-        w2_14.setUi(dataset[0][1]);
-        w3_14.setUi(dataset[0][2]);
-        w4_14.setUi(dataset[0][3]);
-        w5_14.setUi(dataset[0][4]);
-        w6_14.setUi(dataset[0][5]);
-        w7_14.setUi(dataset[0][6]);
-        w8_14.setUi(dataset[0][7]);
-        
+        w1_14.setUi(dataset[i][0]);
+        w2_14.setUi(dataset[i][1]);
+        w3_14.setUi(dataset[i][2]);
+        w4_14.setUi(dataset[i][3]);
+        w5_14.setUi(dataset[i][4]);
+        w6_14.setUi(dataset[i][5]);
+        w7_14.setUi(dataset[i][6]);
+        w8_14.setUi(dataset[i][7]);
+       
         System.out.print(w2_10.Ui);
             //generate weights for all the vectors to the output
             double node10Uj = calcNodeUj(w1_10.weight,w1_10.Ui,w2_10.weight,w2_10.Ui,w3_10.weight,w3_10.Ui,w4_10.weight,w4_10.Ui,w5_10.weight,w5_10.Ui,w6_10.weight,w6_10.Ui,w7_10.weight,w7_10.Ui,w8_10.weight,w8_10.Ui,  w0_10.weight);
@@ -163,12 +163,14 @@ public class AAIProject {
             
             //set the Ui of the outputnode
             double outputnodeUj = calcNodeUj(w10_20.weight,w10_20.Ui,w11_20.weight,w11_20.Ui,w12_20.weight,w12_20.Ui,w13_20.weight,w13_20.Ui,w14_20.weight,w14_20.Ui, w0_20.weight);
+            System.out.println("This the the UJ: "+outputnodeUj);
             w0_20.setUi(outputnodeUj);
             System.out.println("This the the ui: "+w0_20.Ui);
 
             //calculate delta for the output cell
-            w0_20.setDelta(calcOutputDelta(w0_20.Ui,dataset[0][8]));                        // the second parameter is what we want this ANN to train towards
-
+            System.out.println(w0_20.Ui);
+            w0_20.setDelta(calcOutputDelta(w0_20.Ui,dataset[i][8]));                        // the second parameter is what we want this ANN to train towards
+            System.out.println(w0_20.delta);
             //calculate delta for node 3
             w0_10.setDelta(calcDelta(w10_20.Ui,w10_20.weight,w0_20.delta));
             w0_11.setDelta(calcDelta(w11_20.Ui,w11_20.weight,w0_20.delta));
@@ -286,7 +288,7 @@ public class AAIProject {
         double S;
         double delta;
         
-        S = nodesUj*(1-nodesUj);
+        S = nodesUj * (1 - nodesUj);
         delta = (desiredOutput - nodesUj) * S;
      
         return delta;
