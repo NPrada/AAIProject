@@ -17,7 +17,6 @@ import java.util.Random;
 
 
 public class AAIProject {
-
     /**
      * @param args the command line arguments
      */
@@ -29,52 +28,52 @@ public class AAIProject {
         //unless it is a bias arrow then the second parameter is always 1
         
         //hidden nodes
-        Node w0_3 = new Node(calcRand(10,-5),1);  
-        Node w0_4 = new Node(calcRand(10,-5),1);                         
-        //arrows from inputs to each hidden node                                //for these the Ui is the input at their starting node    
-        Node w1_3 = new Node(calcRand(10,0),1);                                
-        Node w2_3 = new Node(calcRand(10,0),0);                              
+        Node w0_3 = new Node(calcRand(20,-10),1);  
+        Node w0_4 = new Node(calcRand(20,-10),1);                         
+        //vectors  from inputs to each hidden node                                //for these the Ui is the input at their starting node    
+        Node w1_3 = new Node(calcRand(20,0),1);                                
+        Node w2_3 = new Node(calcRand(20,0),0);                              
         
-        Node w1_4 = new Node(calcRand(10,0),1);
-        Node w2_4 = new Node(calcRand(10,0),0);
+        Node w1_4 = new Node(calcRand(20,0),1);
+        Node w2_4 = new Node(calcRand(20,0),0);
         
-        //arrows from hidden nodes to output node                               //for these the Ui needs to be calculated on the first forward pass hence the ui is 0
-        Node w3_5 = new Node(calcRand(10,0),0);                                
-        Node w4_5 = new Node(calcRand(10,0),0);
+        //vecors from hidden nodes to output node                               //for these the Ui needs to be calculated on the first forward pass hence the ui is 0
+        Node w3_5 = new Node(calcRand(20,0),0);                                
+        Node w4_5 = new Node(calcRand(20,0),0);
         
         //output node weight
-        Node w0_5 = new Node(calcRand(10,-5),0);                                
+        Node w0_5 = new Node(-20,0);                                
         
         //start a for loop that will do the backpropagation process over and over
         for (int i = 0; i < 100; i++) {                                         //sets the inputs into an array
            
-            System.out.println("These are the current weights");
-            System.out.println(w0_3.weight);
-            System.out.println(w1_3.weight);
-            System.out.println(w2_3.weight);
-            System.out.println(w0_4.weight);
-            System.out.println(w1_4.weight);
-            System.out.println(w2_4.weight);
-            System.out.println(w0_5.weight);
-            System.out.println(w3_5.weight);
-            System.out.println(w4_5.weight);
+//            System.out.println("These are the current weights");
+//            System.out.println(w0_3.weight);
+//            System.out.println(w1_3.weight);
+//            System.out.println(w2_3.weight);
+//            System.out.println(w0_4.weight);
+//            System.out.println(w1_4.weight);
+//            System.out.println(w2_4.weight);
+//            System.out.println(w0_5.weight);
+//            System.out.println(w3_5.weight);
+//            System.out.println(w4_5.weight);
             
-            //generate weights for all the arrows to the output
+            //generate weights for all the vectors to the output
             double node3Uj = calcNodeUj(w1_3.weight , w1_3.Ui , w2_3.weight , w2_3.Ui , w0_3.weight);
             double node4Uj = calcNodeUj(w1_4.weight , w1_4.Ui , w2_4.weight , w2_4.Ui , w0_4.weight);
 
-            //set weights for all the arrows to the output
+            //set weights of all the vectors leaving that node eg node3Uj
             w3_5.setUi(node3Uj); 
+            
             w4_5.setUi(node4Uj); 
-
-
+            
             //set the Ui of the outputnode
             double outputnodeUj = calcNodeUj(w3_5.weight , w3_5.Ui , w4_5.weight , w4_5.Ui , w0_5.weight);
             w0_5.setUi(outputnodeUj);
             System.out.println("This the the ui: "+w0_5.Ui);
 
             //calculate delta for the output cell
-            w0_5.setDelta(calcOutputDelta(w0_5.Ui,1));
+            w0_5.setDelta(calcOutputDelta(w0_5.Ui,1));                          // the second parameter is what it should be
 
             //calculate delta for node 3
             w0_3.setDelta(calcDelta(w3_5.Ui,w3_5.weight,w0_5.delta));
@@ -83,21 +82,23 @@ public class AAIProject {
             w0_4.setDelta(calcDelta(w4_5.Ui,w4_5.weight,w0_5.delta));
 
             //do the pass to update all the weights
-            w0_3.setNewWeight(updateWeight(w0_3.weight,1,w0_3.delta));
+            
+            //hidden node's bias
+            w0_3.setNewWeight(updateWeight(w0_3.weight,1,w0_3.delta));          //bias vecotrs have an Ui of 1
+            w0_4.setNewWeight(updateWeight(w0_4.weight,1,w0_4.delta));
+            
+            //all the vectors to each node from all the inputs
             w1_3.setNewWeight(updateWeight(w1_3.weight,w1_3.Ui,w0_3.delta));
             w2_3.setNewWeight(updateWeight(w2_3.weight,w2_3.Ui,w0_3.delta));
 
-            w0_4.setNewWeight(updateWeight(w0_4.weight,1,w0_4.delta));
             w1_4.setNewWeight(updateWeight(w1_4.weight,w1_4.Ui,w0_4.delta));
             w2_4.setNewWeight(updateWeight(w2_4.weight,w2_4.Ui,w0_4.delta));
-
-            w0_5.setNewWeight(updateWeight(w0_5.weight,1,w0_5.delta));
+            
+            //vectors fromm hidden nodes to output
             w3_5.setNewWeight(updateWeight(w3_5.weight,w3_5.Ui,w0_5.delta));
             w4_5.setNewWeight(updateWeight(w4_5.weight,w4_5.Ui,w0_5.delta));
-            
-            
-            
-            
+            //output node
+            w0_5.setNewWeight(updateWeight(w0_5.weight,1,w0_5.delta));
         }
     }
     
