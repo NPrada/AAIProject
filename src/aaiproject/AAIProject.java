@@ -95,162 +95,171 @@ public class AAIProject {
         
         //output node weight
         Node w0_20 = new Node(calcRand(),0);                                
-        
-        //start a for loop that will do the backpropagation process over and over
-        for (int i = 0; i < 100; i++) {                                         //sets the inputs into an array
+        int epochs =10000; 
+        for (int z = 0; z < epochs; z++) {
+            double SquaredError = 0.0;
+            double totalError = 0.0;
+            //start a for loop that will do the backpropagation process for each row in the dataset
+            for (int i = 0; i < 587; i++) {                                         
            
-        // here I set the Ui of all the input --> hidden node vectors to the correct data part      
-        w1_10.setUi(dataset[i][0]);
-        w2_10.setUi(dataset[i][1]);
-        w3_10.setUi(dataset[i][2]);
-        w4_10.setUi(dataset[i][3]);
-        w5_10.setUi(dataset[i][4]);
-        w6_10.setUi(dataset[i][5]);
-        w7_10.setUi(dataset[i][6]);
-        w8_10.setUi(dataset[i][7]);
-        
-        w1_11.setUi(dataset[i][0]);
-        w2_11.setUi(dataset[i][1]);
-        w3_11.setUi(dataset[i][2]);
-        w4_11.setUi(dataset[i][3]);
-        w5_11.setUi(dataset[i][4]);
-        w6_11.setUi(dataset[i][5]);
-        w7_11.setUi(dataset[i][6]);
-        w8_11.setUi(dataset[i][7]);
-        
-        w1_12.setUi(dataset[i][0]);
-        w2_12.setUi(dataset[i][1]);
-        w3_12.setUi(dataset[i][2]);
-        w4_12.setUi(dataset[i][3]);
-        w5_12.setUi(dataset[i][4]);
-        w6_12.setUi(dataset[i][5]);
-        w7_12.setUi(dataset[i][6]);
-        w8_12.setUi(dataset[i][7]);
-        
-        w1_13.setUi(dataset[i][0]);
-        w2_13.setUi(dataset[i][1]);
-        w3_13.setUi(dataset[i][2]);
-        w4_13.setUi(dataset[i][3]);
-        w5_13.setUi(dataset[i][4]);
-        w6_13.setUi(dataset[i][5]);
-        w7_13.setUi(dataset[i][6]);
-        w8_13.setUi(dataset[i][7]);
-        
-        w1_14.setUi(dataset[i][0]);
-        w2_14.setUi(dataset[i][1]);
-        w3_14.setUi(dataset[i][2]);
-        w4_14.setUi(dataset[i][3]);
-        w5_14.setUi(dataset[i][4]);
-        w6_14.setUi(dataset[i][5]);
-        w7_14.setUi(dataset[i][6]);
-        w8_14.setUi(dataset[i][7]);
-       
-        System.out.print(w2_10.Ui);
-            //generate weights for all the vectors to the output
-            double node10Uj = calcNodeUj(w1_10.weight,w1_10.Ui,w2_10.weight,w2_10.Ui,w3_10.weight,w3_10.Ui,w4_10.weight,w4_10.Ui,w5_10.weight,w5_10.Ui,w6_10.weight,w6_10.Ui,w7_10.weight,w7_10.Ui,w8_10.weight,w8_10.Ui,  w0_10.weight);
-            double node11Uj = calcNodeUj(w1_11.weight,w1_11.Ui,w2_11.weight,w2_11.Ui,w3_11.weight,w3_11.Ui,w4_11.weight,w4_11.Ui,w5_11.weight,w5_11.Ui,w6_11.weight,w6_11.Ui,w7_11.weight,w7_11.Ui,w8_11.weight,w8_11.Ui,  w0_11.weight);
-            double node12Uj = calcNodeUj(w1_12.weight,w1_12.Ui,w2_12.weight,w2_12.Ui,w3_12.weight,w3_12.Ui,w4_12.weight,w4_12.Ui,w5_12.weight,w5_12.Ui,w6_12.weight,w6_12.Ui,w7_12.weight,w7_12.Ui,w8_12.weight,w8_12.Ui,  w0_12.weight);
-            double node13Uj = calcNodeUj(w1_13.weight,w1_13.Ui,w2_13.weight,w2_13.Ui,w3_13.weight,w3_13.Ui,w4_13.weight,w4_13.Ui,w5_13.weight,w5_13.Ui,w6_13.weight,w6_13.Ui,w7_13.weight,w7_13.Ui,w8_13.weight,w8_13.Ui,  w0_13.weight);
-            double node14Uj = calcNodeUj(w1_14.weight,w1_14.Ui,w2_14.weight,w2_14.Ui,w3_14.weight,w3_14.Ui,w4_14.weight,w4_14.Ui,w5_14.weight,w5_14.Ui,w6_14.weight,w6_14.Ui,w7_14.weight,w7_14.Ui,w8_14.weight,w8_14.Ui,  w0_14.weight);
-            
+                // here I set the Ui of all the input --> hidden node vectors to the correct data part      
+                w1_10.setUi(dataset[i][0]);
+                w2_10.setUi(dataset[i][1]);
+                w3_10.setUi(dataset[i][2]);
+                w4_10.setUi(dataset[i][3]);
+                w5_10.setUi(dataset[i][4]);
+                w6_10.setUi(dataset[i][5]);
+                w7_10.setUi(dataset[i][6]);
+                w8_10.setUi(dataset[i][7]);
 
-            //set weights of all the vectors leaving that node eg node3Uj
-            w10_20.setUi(node10Uj);
-            w11_20.setUi(node11Uj); 
-            w12_20.setUi(node12Uj); 
-            w13_20.setUi(node13Uj); 
-            w14_20.setUi(node14Uj); 
-            
-            //set the Ui of the outputnode
-            double outputnodeUj = calcNodeUj(w10_20.weight,w10_20.Ui,w11_20.weight,w11_20.Ui,w12_20.weight,w12_20.Ui,w13_20.weight,w13_20.Ui,w14_20.weight,w14_20.Ui, w0_20.weight);
-            System.out.println("This the the UJ: "+outputnodeUj);
-            w0_20.setUi(outputnodeUj);
-            System.out.println("This the the ui: "+w0_20.Ui);
+                w1_11.setUi(dataset[i][0]);
+                w2_11.setUi(dataset[i][1]);
+                w3_11.setUi(dataset[i][2]);
+                w4_11.setUi(dataset[i][3]);
+                w5_11.setUi(dataset[i][4]);
+                w6_11.setUi(dataset[i][5]);
+                w7_11.setUi(dataset[i][6]);
+                w8_11.setUi(dataset[i][7]);
 
-            //calculate delta for the output cell
-            System.out.println(w0_20.Ui);
-            w0_20.setDelta(calcOutputDelta(w0_20.Ui,dataset[i][8]));                        // the second parameter is what we want this ANN to train towards
-            System.out.println(w0_20.delta);
-            //calculate delta for node 3
-            w0_10.setDelta(calcDelta(w10_20.Ui,w10_20.weight,w0_20.delta));
-            w0_11.setDelta(calcDelta(w11_20.Ui,w11_20.weight,w0_20.delta));
-            w0_12.setDelta(calcDelta(w12_20.Ui,w12_20.weight,w0_20.delta));
-            w0_13.setDelta(calcDelta(w13_20.Ui,w13_20.weight,w0_20.delta));
-            w0_14.setDelta(calcDelta(w14_20.Ui,w14_20.weight,w0_20.delta));
+                w1_12.setUi(dataset[i][0]);
+                w2_12.setUi(dataset[i][1]);
+                w3_12.setUi(dataset[i][2]);
+                w4_12.setUi(dataset[i][3]);
+                w5_12.setUi(dataset[i][4]);
+                w6_12.setUi(dataset[i][5]);
+                w7_12.setUi(dataset[i][6]);
+                w8_12.setUi(dataset[i][7]);
 
-            //do the pass to update all the weights
-            
-            //hidden node's bias
-            w0_10.setNewWeight(updateWeight(w0_10.weight,1,w0_10.delta));       //bias vecotrs have an Ui of 1
-            w0_11.setNewWeight(updateWeight(w0_11.weight,1,w0_11.delta));
-            w0_12.setNewWeight(updateWeight(w0_12.weight,1,w0_12.delta));
-            w0_13.setNewWeight(updateWeight(w0_13.weight,1,w0_13.delta));
-            w0_14.setNewWeight(updateWeight(w0_14.weight,1,w0_14.delta));
-            
-            //all the vectors to each node from all the inputs
-            w1_10.setNewWeight(updateWeight(w1_10.weight,w1_10.Ui,w0_10.delta));
-            w2_10.setNewWeight(updateWeight(w2_10.weight,w2_10.Ui,w0_10.delta));
-            w3_10.setNewWeight(updateWeight(w3_10.weight,w3_10.Ui,w0_10.delta));
-            w4_10.setNewWeight(updateWeight(w4_10.weight,w4_10.Ui,w0_10.delta));
-            w5_10.setNewWeight(updateWeight(w5_10.weight,w5_10.Ui,w0_10.delta));
-            w6_10.setNewWeight(updateWeight(w6_10.weight,w6_10.Ui,w0_10.delta));
-            w7_10.setNewWeight(updateWeight(w7_10.weight,w7_10.Ui,w0_10.delta));
-            w8_10.setNewWeight(updateWeight(w8_10.weight,w8_10.Ui,w0_10.delta));
-            
-            w1_11.setNewWeight(updateWeight(w1_11.weight,w1_11.Ui,w0_11.delta));
-            w2_11.setNewWeight(updateWeight(w2_11.weight,w2_11.Ui,w0_11.delta));
-            w3_11.setNewWeight(updateWeight(w3_11.weight,w3_11.Ui,w0_11.delta));
-            w4_11.setNewWeight(updateWeight(w4_11.weight,w4_11.Ui,w0_11.delta));
-            w5_11.setNewWeight(updateWeight(w5_11.weight,w5_11.Ui,w0_11.delta));
-            w6_11.setNewWeight(updateWeight(w6_11.weight,w6_11.Ui,w0_11.delta));
-            w7_11.setNewWeight(updateWeight(w7_11.weight,w7_11.Ui,w0_11.delta));
-            w8_11.setNewWeight(updateWeight(w8_11.weight,w8_11.Ui,w0_11.delta));
-            
-            w1_12.setNewWeight(updateWeight(w1_12.weight,w1_12.Ui,w0_12.delta));
-            w2_12.setNewWeight(updateWeight(w2_12.weight,w2_12.Ui,w0_12.delta));
-            w3_12.setNewWeight(updateWeight(w3_12.weight,w3_12.Ui,w0_12.delta));
-            w4_12.setNewWeight(updateWeight(w4_12.weight,w4_12.Ui,w0_12.delta));
-            w5_12.setNewWeight(updateWeight(w5_12.weight,w5_12.Ui,w0_12.delta));
-            w6_12.setNewWeight(updateWeight(w6_12.weight,w6_12.Ui,w0_12.delta));
-            w7_12.setNewWeight(updateWeight(w7_12.weight,w7_12.Ui,w0_12.delta));
-            w8_12.setNewWeight(updateWeight(w8_12.weight,w8_12.Ui,w0_12.delta));
-            
-            w1_13.setNewWeight(updateWeight(w1_13.weight,w1_13.Ui,w0_13.delta));
-            w2_13.setNewWeight(updateWeight(w2_13.weight,w2_13.Ui,w0_13.delta));
-            w3_13.setNewWeight(updateWeight(w3_13.weight,w3_13.Ui,w0_13.delta));
-            w4_13.setNewWeight(updateWeight(w4_13.weight,w4_13.Ui,w0_13.delta));
-            w5_13.setNewWeight(updateWeight(w5_13.weight,w5_13.Ui,w0_13.delta));
-            w6_13.setNewWeight(updateWeight(w6_13.weight,w6_13.Ui,w0_13.delta));
-            w7_13.setNewWeight(updateWeight(w7_13.weight,w7_13.Ui,w0_13.delta));
-            w8_13.setNewWeight(updateWeight(w8_13.weight,w8_13.Ui,w0_13.delta));
-            
-            w1_14.setNewWeight(updateWeight(w1_14.weight,w1_14.Ui,w0_14.delta));
-            w2_14.setNewWeight(updateWeight(w2_14.weight,w2_14.Ui,w0_14.delta));
-            w3_14.setNewWeight(updateWeight(w3_14.weight,w3_14.Ui,w0_14.delta));
-            w4_14.setNewWeight(updateWeight(w4_14.weight,w4_14.Ui,w0_14.delta));
-            w5_14.setNewWeight(updateWeight(w5_14.weight,w5_14.Ui,w0_14.delta));
-            w6_14.setNewWeight(updateWeight(w6_14.weight,w6_14.Ui,w0_14.delta));
-            w7_14.setNewWeight(updateWeight(w7_14.weight,w7_14.Ui,w0_14.delta));
-            w8_14.setNewWeight(updateWeight(w8_14.weight,w8_14.Ui,w0_14.delta));
-          
-            
-            //vectors fromm hidden nodes to output
-            w10_20.setNewWeight(updateWeight(w10_20.weight,w10_20.Ui,w0_20.delta));
-            w11_20.setNewWeight(updateWeight(w11_20.weight,w11_20.Ui,w0_20.delta));
-            w12_20.setNewWeight(updateWeight(w12_20.weight,w12_20.Ui,w0_20.delta));
-            w13_20.setNewWeight(updateWeight(w13_20.weight,w13_20.Ui,w0_20.delta));
-            w14_20.setNewWeight(updateWeight(w14_20.weight,w14_20.Ui,w0_20.delta));
-            //output node
-            w0_20.setNewWeight(updateWeight(w0_20.weight,1,w0_20.delta));       //middle parameter always stays 1 beceause this is a bias
+                w1_13.setUi(dataset[i][0]);
+                w2_13.setUi(dataset[i][1]);
+                w3_13.setUi(dataset[i][2]);
+                w4_13.setUi(dataset[i][3]);
+                w5_13.setUi(dataset[i][4]);
+                w6_13.setUi(dataset[i][5]);
+                w7_13.setUi(dataset[i][6]);
+                w8_13.setUi(dataset[i][7]);
+
+                w1_14.setUi(dataset[i][0]);
+                w2_14.setUi(dataset[i][1]);
+                w3_14.setUi(dataset[i][2]);
+                w4_14.setUi(dataset[i][3]);
+                w5_14.setUi(dataset[i][4]);
+                w6_14.setUi(dataset[i][5]);
+                w7_14.setUi(dataset[i][6]);
+                w8_14.setUi(dataset[i][7]);
+
+                //generate weights for all the vectors to the output
+                double node10Uj = calcNodeUj(w1_10.weight,w1_10.Ui,w2_10.weight,w2_10.Ui,w3_10.weight,w3_10.Ui,w4_10.weight,w4_10.Ui,w5_10.weight,w5_10.Ui,w6_10.weight,w6_10.Ui,w7_10.weight,w7_10.Ui,w8_10.weight,w8_10.Ui,  w0_10.weight);
+                double node11Uj = calcNodeUj(w1_11.weight,w1_11.Ui,w2_11.weight,w2_11.Ui,w3_11.weight,w3_11.Ui,w4_11.weight,w4_11.Ui,w5_11.weight,w5_11.Ui,w6_11.weight,w6_11.Ui,w7_11.weight,w7_11.Ui,w8_11.weight,w8_11.Ui,  w0_11.weight);
+                double node12Uj = calcNodeUj(w1_12.weight,w1_12.Ui,w2_12.weight,w2_12.Ui,w3_12.weight,w3_12.Ui,w4_12.weight,w4_12.Ui,w5_12.weight,w5_12.Ui,w6_12.weight,w6_12.Ui,w7_12.weight,w7_12.Ui,w8_12.weight,w8_12.Ui,  w0_12.weight);
+                double node13Uj = calcNodeUj(w1_13.weight,w1_13.Ui,w2_13.weight,w2_13.Ui,w3_13.weight,w3_13.Ui,w4_13.weight,w4_13.Ui,w5_13.weight,w5_13.Ui,w6_13.weight,w6_13.Ui,w7_13.weight,w7_13.Ui,w8_13.weight,w8_13.Ui,  w0_13.weight);
+                double node14Uj = calcNodeUj(w1_14.weight,w1_14.Ui,w2_14.weight,w2_14.Ui,w3_14.weight,w3_14.Ui,w4_14.weight,w4_14.Ui,w5_14.weight,w5_14.Ui,w6_14.weight,w6_14.Ui,w7_14.weight,w7_14.Ui,w8_14.weight,w8_14.Ui,  w0_14.weight);
+
+                //set weights of all the vectors leaving that node eg node3Uj
+                w10_20.setUi(node10Uj);
+                w11_20.setUi(node11Uj); 
+                w12_20.setUi(node12Uj); 
+                w13_20.setUi(node13Uj); 
+                w14_20.setUi(node14Uj); 
+
+                //set the Ui of the outputnode
+                double outputnodeUj = calcNodeUj(w10_20.weight,w10_20.Ui,w11_20.weight,w11_20.Ui,w12_20.weight,w12_20.Ui,w13_20.weight,w13_20.Ui,w14_20.weight,w14_20.Ui, w0_20.weight);
+
+                w0_20.setUi(outputnodeUj);               
+                //System.out.println("This the the ui: "+w0_20.Ui);
+                
+                SquaredError += Math.pow((w0_20.Ui - dataset[i][8]), 2);        //calculates the squared error for these inputs compared to the index flood
+                totalError += Math.abs(w0_20.Ui - dataset[i][8]);
+                //calculate delta for the output cell
+                w0_20.setDelta(calcOutputDelta(w0_20.Ui,dataset[i][8]));                        // the second parameter is what we want this ANN to train towards
+
+                //calculate delta for node 3
+                w0_10.setDelta(calcDelta(w10_20.Ui,w10_20.weight,w0_20.delta));
+                w0_11.setDelta(calcDelta(w11_20.Ui,w11_20.weight,w0_20.delta));
+                w0_12.setDelta(calcDelta(w12_20.Ui,w12_20.weight,w0_20.delta));
+                w0_13.setDelta(calcDelta(w13_20.Ui,w13_20.weight,w0_20.delta));
+                w0_14.setDelta(calcDelta(w14_20.Ui,w14_20.weight,w0_20.delta));
+
+                //do the pass to update all the weights
+
+                //hidden node's bias
+                w0_10.setNewWeight(updateWeight(w0_10.weight,1,w0_10.delta));       //bias vecotrs have an Ui of 1
+                w0_11.setNewWeight(updateWeight(w0_11.weight,1,w0_11.delta));
+                w0_12.setNewWeight(updateWeight(w0_12.weight,1,w0_12.delta));
+                w0_13.setNewWeight(updateWeight(w0_13.weight,1,w0_13.delta));
+                w0_14.setNewWeight(updateWeight(w0_14.weight,1,w0_14.delta));
+
+                //all the vectors to each node from all the inputs
+                w1_10.setNewWeight(updateWeight(w1_10.weight,w1_10.Ui,w0_10.delta));
+                w2_10.setNewWeight(updateWeight(w2_10.weight,w2_10.Ui,w0_10.delta));
+                w3_10.setNewWeight(updateWeight(w3_10.weight,w3_10.Ui,w0_10.delta));
+                w4_10.setNewWeight(updateWeight(w4_10.weight,w4_10.Ui,w0_10.delta));
+                w5_10.setNewWeight(updateWeight(w5_10.weight,w5_10.Ui,w0_10.delta));
+                w6_10.setNewWeight(updateWeight(w6_10.weight,w6_10.Ui,w0_10.delta));
+                w7_10.setNewWeight(updateWeight(w7_10.weight,w7_10.Ui,w0_10.delta));
+                w8_10.setNewWeight(updateWeight(w8_10.weight,w8_10.Ui,w0_10.delta));
+
+                w1_11.setNewWeight(updateWeight(w1_11.weight,w1_11.Ui,w0_11.delta));
+                w2_11.setNewWeight(updateWeight(w2_11.weight,w2_11.Ui,w0_11.delta));
+                w3_11.setNewWeight(updateWeight(w3_11.weight,w3_11.Ui,w0_11.delta));
+                w4_11.setNewWeight(updateWeight(w4_11.weight,w4_11.Ui,w0_11.delta));
+                w5_11.setNewWeight(updateWeight(w5_11.weight,w5_11.Ui,w0_11.delta));
+                w6_11.setNewWeight(updateWeight(w6_11.weight,w6_11.Ui,w0_11.delta));
+                w7_11.setNewWeight(updateWeight(w7_11.weight,w7_11.Ui,w0_11.delta));
+                w8_11.setNewWeight(updateWeight(w8_11.weight,w8_11.Ui,w0_11.delta));
+
+                w1_12.setNewWeight(updateWeight(w1_12.weight,w1_12.Ui,w0_12.delta));
+                w2_12.setNewWeight(updateWeight(w2_12.weight,w2_12.Ui,w0_12.delta));
+                w3_12.setNewWeight(updateWeight(w3_12.weight,w3_12.Ui,w0_12.delta));
+                w4_12.setNewWeight(updateWeight(w4_12.weight,w4_12.Ui,w0_12.delta));
+                w5_12.setNewWeight(updateWeight(w5_12.weight,w5_12.Ui,w0_12.delta));
+                w6_12.setNewWeight(updateWeight(w6_12.weight,w6_12.Ui,w0_12.delta));
+                w7_12.setNewWeight(updateWeight(w7_12.weight,w7_12.Ui,w0_12.delta));
+                w8_12.setNewWeight(updateWeight(w8_12.weight,w8_12.Ui,w0_12.delta));
+
+                w1_13.setNewWeight(updateWeight(w1_13.weight,w1_13.Ui,w0_13.delta));
+                w2_13.setNewWeight(updateWeight(w2_13.weight,w2_13.Ui,w0_13.delta));
+                w3_13.setNewWeight(updateWeight(w3_13.weight,w3_13.Ui,w0_13.delta));
+                w4_13.setNewWeight(updateWeight(w4_13.weight,w4_13.Ui,w0_13.delta));
+                w5_13.setNewWeight(updateWeight(w5_13.weight,w5_13.Ui,w0_13.delta));
+                w6_13.setNewWeight(updateWeight(w6_13.weight,w6_13.Ui,w0_13.delta));
+                w7_13.setNewWeight(updateWeight(w7_13.weight,w7_13.Ui,w0_13.delta));
+                w8_13.setNewWeight(updateWeight(w8_13.weight,w8_13.Ui,w0_13.delta));
+
+                w1_14.setNewWeight(updateWeight(w1_14.weight,w1_14.Ui,w0_14.delta));
+                w2_14.setNewWeight(updateWeight(w2_14.weight,w2_14.Ui,w0_14.delta));
+                w3_14.setNewWeight(updateWeight(w3_14.weight,w3_14.Ui,w0_14.delta));
+                w4_14.setNewWeight(updateWeight(w4_14.weight,w4_14.Ui,w0_14.delta));
+                w5_14.setNewWeight(updateWeight(w5_14.weight,w5_14.Ui,w0_14.delta));
+                w6_14.setNewWeight(updateWeight(w6_14.weight,w6_14.Ui,w0_14.delta));
+                w7_14.setNewWeight(updateWeight(w7_14.weight,w7_14.Ui,w0_14.delta));
+                w8_14.setNewWeight(updateWeight(w8_14.weight,w8_14.Ui,w0_14.delta));
+
+
+                //vectors fromm hidden nodes to output
+                w10_20.setNewWeight(updateWeight(w10_20.weight,w10_20.Ui,w0_20.delta));
+                w11_20.setNewWeight(updateWeight(w11_20.weight,w11_20.Ui,w0_20.delta));
+                w12_20.setNewWeight(updateWeight(w12_20.weight,w12_20.Ui,w0_20.delta));
+                w13_20.setNewWeight(updateWeight(w13_20.weight,w13_20.Ui,w0_20.delta));
+                w14_20.setNewWeight(updateWeight(w14_20.weight,w14_20.Ui,w0_20.delta));
+                //output node
+                w0_20.setNewWeight(updateWeight(w0_20.weight,1,w0_20.delta));       //middle parameter always stays 1 beceause this is a bias
+            }
+           
+            System.out.println("Mean squared error: " + SquaredError / dataset.length);
+            System.out.println(totalError / dataset.length);
+            if(z % (epochs/10) == 0){
+                System.out.println("Mean squared error: " + SquaredError / dataset.length);
+                System.out.println(totalError / dataset.length);
+            }
         }
-        //testing 
-       
+       System.out.println("DONE");
     }
      //this generates a random number for me, if parameters are max 10 and min -5
     //it will return numbers between 5 & -5
     public static double calcRand() {                 
-        double max =  0.5;
-        double min = -0.5;
+        double max =  0.4;
+        double min = -0.4;
         Random r = new Random();
         double randNum = min + (max - min) * r.nextDouble();                                  
         return randNum;
@@ -258,7 +267,7 @@ public class AAIProject {
     }
     //calculates a positive only random number
     public static double calcPosRand() {                 
-        double max =  0.5;
+        double max =  0.8;
         double min =  0;
         Random r = new Random();
         double randNum = min + (max - min) * r.nextDouble();                                  
@@ -397,7 +406,5 @@ public class AAIProject {
         }
         
         return trainingData; 
-    }
-    
-    
+    }    
 }
