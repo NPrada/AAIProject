@@ -27,7 +27,8 @@ public class AAIProject {
         double dataset[][] = standardiseData(x);                                //System.out.println(dataset[0][0]);
         // 1        2     3       4      5      6           7       8      9
         //AREA	BFIHOST	 FARL	FPEXT	LDP   PROPWET	RMED-1D	  SAAR	Index flood
-        int testSetSize = 0;
+        int epochs =10000; 
+        int testSetSize = 117;
         int trainingSetSize = dataset.length - testSetSize;
         //start by initializong all the components that I need for the backprop 
         
@@ -96,12 +97,14 @@ public class AAIProject {
         
         //output node weight
         Vector w0_20 = new Vector(calcRand(),0);                                
-        int epochs =10000; 
+        
         for (int z = 0; z < epochs; z++) {
-            double trainingDataTotalSquaredError = 0.0;
+            
+            double trainingDataTotalSquaredError = 0.0;                         //these two need to be in this loop or they dont work
             double trainingDataTotalError = 0.0;
+            
             //start a for loop that will do the backpropagation process for each row in the dataset
-            for (int i = 0; i < 587; i++) {                                         
+            for (int i = 0; i < trainingSetSize; i++) {                         //loops through just the training set                
            
                 // here I set the Ui of all the input --> hidden node vectors to the correct data part      
                 w1_10.setUi(dataset[i][0]);
@@ -252,21 +255,103 @@ public class AAIProject {
                 w0_20.setNewWeight(updateWeight(w0_20.weight,1,w0_20.delta));       //middle parameter always stays 1 beceause this is a bias
             }
            
-            //System.out.println("Mean squared error: " + SquaredError / dataset.length);
-            //System.out.println(totalError / dataset.length);
-            //System.out.println( SquaredError / dataset.length);
-            
-            double testDataRMSE = Math.sqrt(trainingDataTotalSquaredError / trainingSetSize); // root mean square error
-            double testDataMAE = trainingDataTotalError / trainingSetSize; // mean absolute error
-            System.out.println(testDataRMSE + "," + testDataMAE);
+            double trainingDataRMSE = Math.sqrt(trainingDataTotalSquaredError / trainingSetSize); // root mean square error
+            double trainingDataMAE = trainingDataTotalError / trainingSetSize; // mean absolute error
+            //System.out.println(trainingDataRMSE + "," + trainingDataMAE);
             
             if(z % (epochs/10) == 0){
-                //System.out.println("Mean squared error: " + SquaredError / dataset.length);
-                //System.out.println(totalError / dataset.length);
-            }
+                
+            }           
         }
-       System.out.println("DONE");
+            //in this next section we test the MLP we created from the training data 
+            double testDataTotalSquaredError =0; 
+                double testDataTotalError =0 ; 
+            for (int k = dataset.length - testSetSize; k < dataset.length; k++) {            //this loop is used to only loop the last 87 values for testing the data chnage the -value to set the size of the training data
+
+                // here I set the Ui of all the input --> hidden node vectors to the correct data part      
+                w1_10.setUi(dataset[k][0]);
+                w2_10.setUi(dataset[k][1]);
+                w3_10.setUi(dataset[k][2]);
+                w4_10.setUi(dataset[k][3]);
+                w5_10.setUi(dataset[k][4]);
+                w6_10.setUi(dataset[k][5]);
+                w7_10.setUi(dataset[k][6]);
+                w8_10.setUi(dataset[k][7]);
+
+                w1_11.setUi(dataset[k][0]);
+                w2_11.setUi(dataset[k][1]);
+                w3_11.setUi(dataset[k][2]);
+                w4_11.setUi(dataset[k][3]);
+                w5_11.setUi(dataset[k][4]);
+                w6_11.setUi(dataset[k][5]);
+                w7_11.setUi(dataset[k][6]);
+                w8_11.setUi(dataset[k][7]);
+
+                w1_12.setUi(dataset[k][0]);
+                w2_12.setUi(dataset[k][1]);
+                w3_12.setUi(dataset[k][2]);
+                w4_12.setUi(dataset[k][3]);
+                w5_12.setUi(dataset[k][4]);
+                w6_12.setUi(dataset[k][5]);
+                w7_12.setUi(dataset[k][6]);
+                w8_12.setUi(dataset[k][7]);
+
+                w1_13.setUi(dataset[k][0]);
+                w2_13.setUi(dataset[k][1]);
+                w3_13.setUi(dataset[k][2]);
+                w4_13.setUi(dataset[k][3]);
+                w5_13.setUi(dataset[k][4]);
+                w6_13.setUi(dataset[k][5]);
+                w7_13.setUi(dataset[k][6]);
+                w8_13.setUi(dataset[k][7]);
+
+                w1_14.setUi(dataset[k][0]);
+                w2_14.setUi(dataset[k][1]);
+                w3_14.setUi(dataset[k][2]);
+                w4_14.setUi(dataset[k][3]);
+                w5_14.setUi(dataset[k][4]);
+                w6_14.setUi(dataset[k][5]);
+                w7_14.setUi(dataset[k][6]);
+                w8_14.setUi(dataset[k][7]);
+
+                //generate weights for all the vectors to the output
+                double node10Uj = calcNodeUj(w1_10.weight, w1_10.Ui, w2_10.weight, w2_10.Ui, w3_10.weight, w3_10.Ui, w4_10.weight, w4_10.Ui, w5_10.weight, w5_10.Ui, w6_10.weight, w6_10.Ui, w7_10.weight, w7_10.Ui, w8_10.weight, w8_10.Ui, w0_10.weight);
+                double node11Uj = calcNodeUj(w1_11.weight, w1_11.Ui, w2_11.weight, w2_11.Ui, w3_11.weight, w3_11.Ui, w4_11.weight, w4_11.Ui, w5_11.weight, w5_11.Ui, w6_11.weight, w6_11.Ui, w7_11.weight, w7_11.Ui, w8_11.weight, w8_11.Ui, w0_11.weight);
+                double node12Uj = calcNodeUj(w1_12.weight, w1_12.Ui, w2_12.weight, w2_12.Ui, w3_12.weight, w3_12.Ui, w4_12.weight, w4_12.Ui, w5_12.weight, w5_12.Ui, w6_12.weight, w6_12.Ui, w7_12.weight, w7_12.Ui, w8_12.weight, w8_12.Ui, w0_12.weight);
+                double node13Uj = calcNodeUj(w1_13.weight, w1_13.Ui, w2_13.weight, w2_13.Ui, w3_13.weight, w3_13.Ui, w4_13.weight, w4_13.Ui, w5_13.weight, w5_13.Ui, w6_13.weight, w6_13.Ui, w7_13.weight, w7_13.Ui, w8_13.weight, w8_13.Ui, w0_13.weight);
+                double node14Uj = calcNodeUj(w1_14.weight, w1_14.Ui, w2_14.weight, w2_14.Ui, w3_14.weight, w3_14.Ui, w4_14.weight, w4_14.Ui, w5_14.weight, w5_14.Ui, w6_14.weight, w6_14.Ui, w7_14.weight, w7_14.Ui, w8_14.weight, w8_14.Ui, w0_14.weight);
+
+                //set weights of all the vectors leaving that node eg node3Uj
+                w10_20.setUi(node10Uj);
+                w11_20.setUi(node11Uj);
+                w12_20.setUi(node12Uj);
+                w13_20.setUi(node13Uj);
+                w14_20.setUi(node14Uj);
+
+                //set the Ui of the outputnode
+                double outputnodeUj = calcNodeUj(w10_20.weight, w10_20.Ui, w11_20.weight, w11_20.Ui, w12_20.weight, w12_20.Ui, w13_20.weight, w13_20.Ui, w14_20.weight, w14_20.Ui, w0_20.weight);
+
+                w0_20.setUi(outputnodeUj);
+                //System.out.println("This the the ui: "+w0_20.Ui);
+
+                //double unstPredicted = outputNode.output() * (maxFloodIndex - minFloodIndex) + minFloodIndex;
+                double maxFloodIndex = 992.846;
+                double minFloodIndex = 0.142;
+                double unstPredicted = w0_20.Ui * (maxFloodIndex - minFloodIndex) + minFloodIndex;
+                double unstActual = dataset[k][8] * (maxFloodIndex - minFloodIndex) + minFloodIndex;
+
+                //testdataSquaredError += Math.pow((w0_20.Ui - dataset[k][8]), 2);        //calculates the squared error for these inputs compared to the index flood
+                //testdataSquaredError += Math.sqrt(Math.pow((unstPredicted - unstActual), 2));
+                testDataTotalSquaredError += Math.pow((unstPredicted - unstActual), 2);
+                testDataTotalError += Math.abs(unstPredicted - unstActual);
+
+            }
+                double testDataRMSE = Math.sqrt(testDataTotalSquaredError / testSetSize);   // root mean square error
+                double testDataMAE = testDataTotalError / testSetSize;                      // mean absolute error
+                System.out.println("Test data result RMSE:"+testDataRMSE + "\t MAE:" + testDataMAE);
+                //System.out.println("DONE");
     }
+    
      //this generates a random number for me, if parameters are max 10 and min -5
     //it will return numbers between 5 & -5
     public static double calcRand() {                 
